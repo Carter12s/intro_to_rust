@@ -16,6 +16,10 @@ path = "src/threads.rs"
 name = "async"
 path = "src/async.rs"
 
+[[bin]]
+name = "str"
+path = "src/str.rs"
+
 [dependencies]
 tokio = { version = "1.21.2", features = ["full"] }
 futures = "0.3.25"
