@@ -3,6 +3,19 @@ name = "intro_to_rust"
 version = "0.1.0"
 edition = "2021"
 
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[[bin]]
+name = "basic_types"
+path = "src/basic_types.rs"
+
+[[bin]]
+name = "threads"
+path = "src/threads.rs"
+
+[[bin]]
+name = "async"
+path = "src/async.rs"
 
 [dependencies]
+tokio = { version = "1.21.2", features = ["full"] }
+futures = "0.3.25"
