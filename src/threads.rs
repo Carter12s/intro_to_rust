@@ -14,6 +14,23 @@ use std::{
 /// "Plain Old Data" = Send
 /// Mutex = Sync + Send
 
+fn shared_reference() {
+    // I have a string and I want to share it between the current thread
+    // and a new thread. Can I do that with a reference?
+    let string = "hello".to_string();
+
+    // std::thread::spawn(|| {
+    //     println!("string {}", &string);
+    // });
+
+    // No!
+    // When we cross thread boundaries you can't guarantee the thread
+    // that owns the memory will outlive the thread the references it
+    // this could lead to a "use after free"
+
+    // When crossing thread boundaries references have lifetimes of 'static
+}
+
 fn shared_rc() {
     // Rc is a std type for a basic "shared_ptr"
     // Rc = "Reference Counted"
@@ -73,5 +90,39 @@ fn edit_war() {
         }
     });
 }
+
+/// Fundamental rust concept here
+///
+/// Functionality is often achieved by type encapsulation
+///
+/// Each type wrapper adds a specific functionality building upon
+/// the functionality of the inner type
+///
+/// Actual code from roslibrust:
+///
+/// // We wrap a generic Tcp stream, in a type wrapper that handles encryption (optionally)
+/// // and then wrap it in a WebSocketStream to get to a higher level api
+/// type Socket = tokio_tungstenite::WebSocketStream<tokio_tungstenite::MaybeTlsStream<TcpStream>>;
+/// // We then wrap our socket in two types that split the read and write halves of the API apart
+/// type Reader = SplitStream<Socket>;
+/// type Writer = SplitSink<Socket, Message>;
+///
+/// struct Client {
+///   reader: RwLock<Reader>,
+///   writer: RwLock<Writer>,
+/// }
+///
+/// type ClientHandle = Arc<Client>;
+///
+///
+/// TcpStream gives us basic read write
+/// MaybeTlsStream wraps that with encryption support
+/// WebSocketStream gives us a higher level api
+/// SplitStream and SplitSink allow us to have one socket but separate Read and Write
+/// RwLock is a mutex that allows us to safely read / write from different threads
+/// Arc guarantees that the client stays alive wherever it is used
+///
+/// These types come from 4 different libraries (mio, tokio, tungstenite, std),
+/// but all interoperate thanks to traits!
 
 fn main() {}

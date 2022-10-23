@@ -20,6 +20,10 @@ path = "src/async.rs"
 name = "str"
 path = "src/str.rs"
 
+[[bin]]
+name = "box_dyn"
+path = "src/box_dyn.rs"
+
 [dependencies]
 tokio = { version = "1.21.2", features = ["full"] }
 futures = "0.3.25"

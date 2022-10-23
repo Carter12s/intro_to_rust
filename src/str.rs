@@ -37,6 +37,12 @@ fn main() {
         slice.as_ptr(),
     );
 
+    println!(
+        "Length of array {}, Length of slice {}",
+        array.len(),
+        slice.len(),
+    );
+
     // str == [u8] with the restriction that the u8 is valid unicode
     let fancy_str = "💩";
     // let fancy_slice = &fancy_str[0..1];

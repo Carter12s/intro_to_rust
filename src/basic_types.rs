@@ -70,7 +70,7 @@ fn generic_print_list() {
     // "dyn Trait" = doesn't have a size known at compile time!
 }
 
-/// When we write templated functions in Rust we write them with "Trait Guards"
+/// When we write generic (templated) functions in Rust we write them with "Trait Guards"
 
 // Why won't this compile?
 // fn bad_generic_printer<T>(item: T) {
