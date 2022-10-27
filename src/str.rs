@@ -18,7 +18,7 @@ fn main() {
 
     let array = [0, 1, 2, 3];
 
-    // Slices in rust are "runtime" size (not mut sized)
+    // Slices in rust are "runtime" sized (not mut sized)
     let slice = &array[0..2];
 
     // [i32] => array of i32 of any length including 0, size unknown
